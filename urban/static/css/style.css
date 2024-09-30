@@ -1,6 +1,42 @@
-h1{
+ h1{
     color: darkred;
 }
-.main{
-    background-color: darkgrey;
+
+
+body {
+   
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.main {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 5px;
+   
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color:brown;
 }
