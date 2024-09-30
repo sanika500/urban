@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-def index(request):
+def userlogin(request):
     if request.method=='POST':
         userrname=request.POST['userrname']
         password=request.POST['password']
@@ -18,14 +18,20 @@ def home(request):
     return render(request,'home.html')
 def logout_view(request):
     logout(request)
-    return redirect('index')
+    return redirect('login')
 def register(request):
     if request.method=='POST':
         userrname=request.POST['userrname']
         password=request.POST['password']
         email=request.POST['email']
-        user=User.objects.create_user(userrname=userrname,password=password,email=email)
-        user.save()
+        try:
+
+            user=User.objects.create_user(username=userrname,password=password,email=email)
+            user.save()
+
+        except:
+            return redirect('register')
+
         return redirect('login')
     else:
         return render(request,'register.html')
