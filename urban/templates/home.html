@@ -45,7 +45,7 @@
     </div>
         </div>
        
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
               <div class="col-lg-4"> <img src="{% static 'images/hunter350image.png' %}" class="img-fluid"></div>
               <div class="col-lg-4" ><img src="{% static 'images/classic350jodhpurblue.jpeg' %}" class="img-fluid"></div>
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-6" imgsrc="{% static 'images/guerrilla450guerrillarightsideview.jpeg' %}" class="img-fluid"></div>
                 <div class="col-lg-6" imgsrc="{% static 'images/supermeteor650image'%}" class="img-fluid"></div>
-          </div>   
+          </div>    -->
 
 
 
@@ -99,15 +99,16 @@
 
 
 
-
-<!-- <div class="row">
+ <div class="row">
   {% for i in data %}
   <div class="col-lg-3">
-    <img src="{% static 'images/bullet.jpeg' %}" >
+    <img src="{{i.image.url}}" >
     <h2>{{i.name}}</h2>
+    <h6>{{i.price}}</h6>
+    <a href="view product/{{i.pk}}" class="btn btn-primary">View</a>
   </div>
   {% endfor %}
-</div> -->
+</div> 
 
 
 
