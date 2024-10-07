@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
-
-from urban.mainapp.models import product
+from . models import *
 
 # Create your views here.
 
@@ -17,7 +16,8 @@ def userlogin(request):
         
     return render(request,'login.html')
 def home(request):
-    return render(request,'home.html')
+    data=product.objects.all()
+    return render(request,'home.html', {'data':data})
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -38,7 +38,3 @@ def register(request):
     else:
         return render(request,'register.html')
 
-def userhome(req):
-    data=product.objects.all()
-    product=product.objects.get(pk=pk)
-    return render(req,'userhome.html',{'data':data})

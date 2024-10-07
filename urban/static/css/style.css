@@ -130,3 +130,32 @@ ul {
     margin: 10px; 
   }
   
+  .row{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap:wrap; 
+    
+
+    /* width: 50px;
+    height: 50px;
+    margin:10px;  */
+
+/* 
+     display:flex;
+    float: left;
+    width: 50px;
+    padding:0 10px;
+    justify-content: space-evenly;
+    size: 75px;  */
+  }
+  .card123{
+    height: 500px;
+    width: 500px;
+    object-fit: contain;
+
+  }
+  .proimg{
+    object-fit: contain;
+    height: 500px;
+    width: 500px;
+  }
