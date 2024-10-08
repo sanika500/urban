@@ -37,4 +37,8 @@ def register(request):
         return redirect('login')
     else:
         return render(request,'register.html')
+def viewproduct(request,pk):
+ data=product.objects.filter(pk=pk)
+ return render(request,'product.html',{'data':data})
+
 

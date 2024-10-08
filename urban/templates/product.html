@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="row">
+        {% for i in data %}
+        <div class="card123">
+        <img src="{{i.image.url}}"class="proimg">
+          <h2>{{i.name}}</h2>
+          <h6>Rs:{{i.price}}</h6>
+          <a href="view product/{{i.pk}}" class="btn btn-primary">Buy</a>
+         
+        </div>
+        {% endfor %}
+      </div>  
+</body>
+</html>
