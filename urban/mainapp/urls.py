@@ -4,5 +4,5 @@ urlpatterns=[
      path('register',views.register,name="register"),
      path('home',views.home,name="home"),
      path('',views.userlogin,name="login"),
-     path('product/<pk>/',views.viewproduct,name="viewproduct"),
+     path('viewproduct/<pk>/',views.viewproduct,name="viewproduct"),
 ]

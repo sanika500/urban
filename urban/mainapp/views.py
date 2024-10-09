@@ -6,12 +6,17 @@ from . models import *
 # Create your views here.
 
 def userlogin(request):
-    if request.method=='POST':
-        userrname=request.POST['userrname']
+    if 'username' in request.session:
+        data=product.objects.all()
+        return render(request,'home.html',{'data':data})
+    
+    elif request.method=='POST':
+        username=request.POST['username']
         password=request.POST['password']
-        user=authenticate(request,userrname=userrname,password=password)
+        user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
+            request.session['username']= username
             return redirect('home')
         
     return render(request,'login.html')
@@ -20,15 +25,16 @@ def home(request):
     return render(request,'home.html', {'data':data})
 def logout_view(request):
     logout(request)
+    request.session.flush()
     return redirect('login')
 def register(request):
     if request.method=='POST':
-        userrname=request.POST['userrname']
+        username=request.POST['username']
         password=request.POST['password']
         email=request.POST['email']
         try:
 
-            user=User.objects.create_user(username=userrname,password=password,email=email)
+            user=User.objects.create_user(username=username,password=password,email=email)
             user.save()
 
         except:
