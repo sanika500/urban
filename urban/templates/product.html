@@ -8,8 +8,8 @@
 <body>
     <div class="pro">
         {% for i in data %}
-        <div class="card123">
-        <img src="{{i.image.url}}"class="proimg">
+        <div class="card1234">
+        <img src="{{i.image.url}}"class="prodimg">
           <h2>{{i.name}}</h2>
           <h6>Rs:{{i.price}}</h6>
           <a href="{% url 'viewproduct' i.pk %}" class="btn btn-primary">Buy</a>
