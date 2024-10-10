@@ -1,17 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
 </head>
 <body>
     <div class="pro">
         {% for i in data %}
         <div class="card1234">
         <img src="{{i.image.url}}"class="prodimg">
-          <h2>{{i.name}}</h2>
-          <h6>Rs:{{i.price}}</h6>
+          <h2 style="color:crimson;" >{{i.name}}</h2>
+          <h3 style="color: crimson;" >Rs:{{i.price}}</h3>
+          <h3  style="color: crimson;" >STOCK :{{i.stock}}</h3>
+          <h3 style="color: crimson;" >ACCESSORIES :{{i.accessories}}</h3>
+          <h3 style="color:crimson;" >BOOKING AMOUNT :{{i.bookingamount}}</h3>
           <a href="{% url 'viewproduct' i.pk %}" class="btn btn-primary">Buy</a>
          
         </div>

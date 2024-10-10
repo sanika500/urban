@@ -9,4 +9,6 @@ class product(models.Model):
       accessories=models.CharField(max_length=50)
       bookingamount=models.IntegerField()
       image=models.ImageField()
+
+      
       
