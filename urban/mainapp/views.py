@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from django.contrib import messages
 from . models import *
 
 # Create your views here.
@@ -46,5 +47,31 @@ def register(request):
 def viewproduct(request,pk):
  data=product.objects.filter(pk=pk)
  return render(request,'product.html',{'data':data})
+
+def seller(request):
+     if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        confirmpassword=request.POST[' confirm password']
+        if not username or not password or not confirmpassword:
+         messages.error(request,'all fields are required')
+         
+     elif confirmpassword !="password": 
+         messages.error(request,'password doesnot match')
+         
+     elif User.objects.filter(username=username).exists():
+         messages.error(request,"username already exists")    
+         
+     else:   
+         user=User.objects.createseller(username=username,password=password)
+         user.is_staff=True
+         user.save()
+         return render(request,'seller.html')
+         
+            
+        
+        
+        
+    
 
 
