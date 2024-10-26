@@ -67,6 +67,20 @@ def seller(request):
          user.is_staff=True
          user.save()
          return render(request,'seller.html')
+     
+def sellerlogin(request):
+    if request.method=='POST':
+        username=request.POST['username']
+        password=request.POST['password']
+        confirmpassword=request.POST['confirmpassword']
+        user=authenticate(username=username,password=password,confirmpassword=confirmpassword)
+        if user is not None:
+            login(request,user)
+            request.session['username']= username
+            return render('seller.html')
+        return redirect(request,"sellerlogin.html")
+        
+            
          
             
         
