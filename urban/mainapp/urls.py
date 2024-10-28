@@ -5,4 +5,8 @@ urlpatterns=[
      path('home',views.home,name="home"),
      path('',views.userlogin,name="login"),
      path('viewproduct/<pk>/',views.viewproduct,name="viewproduct"),
+     path('seller',views.seller,name="seller"),
+     path('sellerlogin',views.sellerlogin,name="sellerlogin"),
+     path('sellerindex',views.sellerindex,name="sellerindex"),
+     path('login',views.login,name="login"),
 ]

@@ -48,6 +48,27 @@ def viewproduct(request,pk):
  data=product.objects.filter(pk=pk)
  return render(request,'product.html',{'data':data})
 
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, User)  
+            return redirect('home')  
+        else:
+            messages.error(request, "Invalid username or password.")
+    
+    return render(request, 'login.html') 
+
+
+
+
+
+
+
 def seller(request):
      if request.method=='POST':
         username=request.POST['username']
@@ -79,6 +100,15 @@ def sellerlogin(request):
             request.session['username']= username
             return render('seller.html')
         return redirect(request,"sellerlogin.html")
+
+def sellerindex(request):
+    user = request.user
+    products = products.objects.filter(seller=user)
+    models = models.objects.all() 
+    return render(request, "sellerindex.html")
+
+    
+
         
             
          
