@@ -49,45 +49,46 @@ def viewproduct(request,pk):
  return render(request,'product.html',{'data':data})
 
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get('username')  
+        password = request.POST.get('password')  
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, User)  
+            login(request, user)  
             return redirect('home')  
         else:
             messages.error(request, "Invalid username or password.")
     
-    return render(request, 'login.html') 
-
-
-
+    return render(request, 'login.html')
 
 
 
 
 def seller(request):
-     if request.method=='POST':
+    
+    confirmpassword=None
+    
+    if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']
-        confirmpassword=request.POST[' confirm password']
+        confirmpassword=request.POST[' confirmpassword']
         if not username or not password or not confirmpassword:
          messages.error(request,'all fields are required')
          
-     elif confirmpassword !="password": 
+        elif confirmpassword != password: 
          messages.error(request,'password doesnot match')
          
-     elif User.objects.filter(username=username).exists():
+        elif User.objects.filter(username=username).exists():
          messages.error(request,"username already exists")    
          
-     else:   
+        else:   
          user=User.objects.createseller(username=username,password=password)
          user.is_staff=True
          user.save()
          return render(request,'seller.html')
+    return render(request,'seller.html')
      
 def sellerlogin(request):
     if request.method=='POST':
