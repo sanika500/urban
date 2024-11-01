@@ -22,8 +22,10 @@
 
     <a href="{% url 'addproduct' %}"><button class="btn btn-dark ">Add Product</button></a>
     </div>
-
+<div>
+    {% for product in products %}
     <div class="image">
+       
         <img src="{{i.image.url}}" alt="images">
         <h1>Name</h1>
         <h3>Stock</h3>
@@ -35,9 +37,27 @@
         <a href="{% url 'delete'%}">delete</a>
 
     </div>
-
+    {% endfor %}
+</div>
 
 
     
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

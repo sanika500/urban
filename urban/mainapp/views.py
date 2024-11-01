@@ -4,11 +4,12 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from . models import *
 
+
 # Create your views here.
 
 def userlogin(request):
     if 'username' in request.session:
-        data=product.objects.all()
+        data=Product.objects.all()
         return render(request,'home.html',{'data':data})
     
     elif request.method=='POST':
@@ -22,7 +23,7 @@ def userlogin(request):
         
     return render(request,'login.html')
 def home(request):
-    data=product.objects.all()
+    data=Product.objects.all()
     return render(request,'home.html', {'data':data})
 def logout_view(request):
     logout(request)
@@ -45,7 +46,7 @@ def register(request):
     else:
         return render(request,'register.html')
 def viewproduct(request,pk):
- data=product.objects.filter(pk=pk)
+ data=Product.objects.filter(pk=pk)
  return render(request,'product.html',{'data':data})
 
 
@@ -104,9 +105,8 @@ def sellerlogin(request):
 
 def sellerindex(request):
     user = request.user
-    products = products.objects.filter(seller=user)
-    models = models.objects.all() 
-    return render(request, "sellerindex.html")
+    products = Product.objects.filter(seller=user)
+    return render(request, "sellerindex.html",{'products': products,'models':models})
 
     
 
