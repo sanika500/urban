@@ -91,22 +91,52 @@ def seller(request):
          return render(request,'seller.html')
     return render(request,'seller.html')
      
+# def sellerlogin(request):
+#     if request.method=='POST':
+#         username=request.POST['username']
+#         password=request.POST['password']
+#         confirmpassword=request.POST['confirmpassword']
+#         user=authenticate(username=username,password=password,confirmpassword=confirmpassword)
+#         if user is not None:
+#             login(request,user)
+#             request.session['username']= username
+#             return render('seller.html')
+#         return redirect(request,"sellerlogin.html")
+
+
 def sellerlogin(request):
-    if request.method=='POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        confirmpassword=request.POST['confirmpassword']
-        user=authenticate(username=username,password=password,confirmpassword=confirmpassword)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
         if user is not None:
-            login(request,user)
-            request.session['username']= username
-            return render('seller.html')
-        return redirect(request,"sellerlogin.html")
+            login(request, user)
+            return redirect('sellerindex')
+        else:
+            messages.error(request, "Invalid username or password.")
+
+    return render(request, 'sellerlogin.html')
+
+
+
+
+
+# def sellerindex(request):
+#     user = request.user
+#     products = Product.objects.filter(seller=user)
+#     return render(request, "sellerindex.html",{'products': products,'models':models})
+
 
 def sellerindex(request):
-    user = request.user
-    products = Product.objects.filter(seller=user)
-    return render(request, "sellerindex.html",{'products': products,'models':models})
+    if request.user.is_authenticated and request.user.is_staff:
+        products = Product.objects.filter(seller=request.user)
+        return render(request, "sellerindex.html", {'products': products})
+    else:
+        return redirect('sellerlogin')
+
+
+
 
     
 
