@@ -26,7 +26,8 @@
     {% for product in products %}
     <div class="image">
        
-        <img src="{{i.image.url}}" alt="images">
+        {% comment %} <img src="{{i.images.url}}" alt="images"> {% endcomment %}
+        <img src="{% static 'images' %}" alt=images>
         <h1>Name</h1>
         <h3>Stock</h3>
         <h3>Description</h3>

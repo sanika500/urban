@@ -69,12 +69,12 @@ def login_view(request):
 
 def seller(request):
     
-    confirmpassword=None
+    # confirmpassword=None
     
     if request.method=='POST':
-        username=request.POST['username']
+        username=request.POST['sellername']
         password=request.POST['password']
-        confirmpassword=request.POST[' confirmpassword']
+        confirmpassword=request.POST['password']
         if not username or not password or not confirmpassword:
          messages.error(request,'all fields are required')
          
@@ -85,38 +85,43 @@ def seller(request):
          messages.error(request,"username already exists")    
          
         else:   
-         user=User.objects.createseller(username=username,password=password)
+         user=User.objects.create_user(username=username,password=password)
          user.is_staff=True
          user.save()
          return render(request,'seller.html')
     return render(request,'seller.html')
      
-# def sellerlogin(request):
-#     if request.method=='POST':
-#         username=request.POST['username']
-#         password=request.POST['password']
-#         confirmpassword=request.POST['confirmpassword']
-#         user=authenticate(username=username,password=password,confirmpassword=confirmpassword)
-#         if user is not None:
-#             login(request,user)
-#             request.session['username']= username
-#             return render('seller.html')
-#         return redirect(request,"sellerlogin.html")
-
-
 def sellerlogin(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-
+    if 'username' in request.session:
+        return redirect('sellerindex')
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        # confirmpassword=request.POST.get('confirmpassword')
+        user=authenticate(username=username,password=password)
         if user is not None:
-            login(request, user)
+            login(request,user)
+            request.session['username']= username
             return redirect('sellerindex')
-        else:
-            messages.error(request, "Invalid username or password.")
+            return render(request,"sellerlogin.html")
+        return render(request, "sellerlogin.html", {'error': 'Invalid data'})
+    return render(request, "sellerlogin.html")
+    
 
-    return render(request, 'sellerlogin.html')
+
+# def sellerlogin(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password)
+
+#         if user is not None:
+#             login(request, user)
+#             return redirect('sellerindex')
+#         else:
+#             messages.error(request, "Invalid username or password.")
+
+#     return render(request, 'sellerlogin.html')
 
 
 
@@ -129,11 +134,16 @@ def sellerlogin(request):
 
 
 def sellerindex(request):
+
     if request.user.is_authenticated and request.user.is_staff:
         products = Product.objects.filter(seller=request.user)
-        return render(request, "sellerindex.html", {'products': products})
+        
+        return render(request, "sellerindex.html", {'products': products}) 
     else:
+       
         return redirect('sellerlogin')
+
+
 
 
 

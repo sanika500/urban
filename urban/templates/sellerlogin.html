@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
+    
 <body>
     <form action="{% url 'sellerlogin' %}" method="post">
         {% csrf_token%}
@@ -13,6 +13,11 @@
         <input type="confirmpassword" name="confirmpassword" placeholder="confirmpassword">
         <input type="submit" value="submit">
     </form>
+
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
     
     <a href="{% url 'register' %}">register</a>
 </body>
