@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,4 +21,34 @@
     
     <a href="{% url 'register' %}">register</a>
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Login</title>                                                                                                                  
+</head>
+<body>
+    <form action="{% url 'sellerlogin' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="sellername" placeholder="Seller Name" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Submit">
+    </form>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    
+    <a href="{% url 'register' %}">Register</a>
+</body>
 </html>
+
+
+
+
+
+

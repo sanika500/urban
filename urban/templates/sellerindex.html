@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -44,9 +44,62 @@
 
     
 </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    {% load static %}
+</head>
+<body>
+
+    <div>
+        <h1>SELLER PAGE</h1>
+   
+        <form action="{% url 'sellerindex' %}" method="post">
+            {% csrf_token %}
+            <select name="model" id="model">
+                <option value="all">All</option>
+                {% for model in models %}
+                    <option value="{{ model.pk }}">{{ model.model }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Apply">
+        </form>
+
+        <a href="{% url 'addproduct' %}"><button class="btn btn-dark">Add Product</button></a>
+
+    </div>
+
+    <div>
+        {% for product in products %}
+        <div class="product">
+            <!-- Display product image if available -->
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height: auto;">
+            {% else %}
+                <img src="{% static 'images/default-product.jpg' %}" alt="No image available" style="width: 200px; height: auto;">
+            {% endif %}
+            
+            <h1>{{ product.name }}</h1>
+            <h3>Stock: {{ product.stock }}</h3>
+            <h3>Description: {{ product.description }}</h3>
+            <h1>Price: {{ product.price }}</h1>
+            <h3>Accessories: {{ product.accessories }}</h3>
+            <h1>Booking Amount: {{ product.bookingamount }}</h1>
+            
+            <a href="{% url 'edit' product.pk %}">Edit</a>
+            <a href="{% url 'delete' product.pk %}">Delete</a>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
 </html>
-
-
 
 
 

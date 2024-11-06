@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from . models import *
+from .forms import ProductForm
 
 
 # Create your views here.
@@ -91,21 +92,46 @@ def seller(request):
          return render(request,'seller.html')
     return render(request,'seller.html')
      
+# def sellerlogin(request):
+    # if 'username' in request.session:
+    #     return redirect('sellerindex')
+    # if request.method=='POST':
+    #     username=request.POST.get('username')
+    #     password=request.POST.get('password')
+    #     # confirmpassword=request.POST.get('confirmpassword')
+    #     user=authenticate(username=username,password=password)
+    #     if user is not None:
+    #         login(request,user)
+    #         request.session['username']= username
+    #         return redirect('sellerindex')
+    #         return render(request,"sellerlogin.html")
+    #     return render(request, "sellerlogin.html", {'error': 'Invalid data'})
+    # return render(request, "sellerlogin.html")
+
+
+
 def sellerlogin(request):
     if 'username' in request.session:
-        return redirect('sellerindex')
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        # confirmpassword=request.POST.get('confirmpassword')
-        user=authenticate(username=username,password=password)
+        return redirect('sellerindex')  # Redirect to seller index page if already logged in.
+    
+    if request.method == 'POST':
+        username = request.POST.get('sellername')  # Changed to match the form field name
+        password = request.POST.get('password')   # Make sure it's 'password', not 'confirmpassword'
+        
+        user = authenticate(request, username=username, password=password)  # Properly authenticate
         if user is not None:
-            login(request,user)
-            request.session['username']= username
-            return redirect('sellerindex')
-            return render(request,"sellerlogin.html")
-        return render(request, "sellerlogin.html", {'error': 'Invalid data'})
-    return render(request, "sellerlogin.html")
+            login(request, user)  # Log in the user
+            request.session['username'] = username  # Store the username in the session
+            return redirect('sellerindex')  # Redirect to the seller index page after successful login
+        
+        return render(request, "sellerlogin.html", {'error': 'Invalid username or password'})  # Return error if authentication fails
+
+    return render(request, "sellerlogin.html")  # Render the login page for GET request
+
+
+
+
+
     
 
 
@@ -133,15 +159,62 @@ def sellerlogin(request):
 #     return render(request, "sellerindex.html",{'products': products,'models':models})
 
 
-def sellerindex(request):
+# def sellerindex(request):
 
-    if request.user.is_authenticated and request.user.is_staff:
-        products = Product.objects.filter(seller=request.user)
+#     if request.user.is_authenticated and request.user.is_staff:
+#         products = Product.objects.filter(seller=request.user)
         
-        return render(request, "sellerindex.html", {'products': products}) 
-    else:
+#         return render(request, "sellerindex.html", {'products': products}) 
+#     else:
        
-        return redirect('sellerlogin')
+#         return redirect('sellerlogin')
+
+
+
+def addproduct(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.seller = request.user  # Ensure the logged-in user is the seller
+            product.save()
+            return redirect('sellerindex')  # Redirect to seller index page after successful form submission
+    else:
+        form = ProductForm()
+    
+    return render(request, 'addproduct.html', {'form': form})
+
+
+
+def addproduct(request):
+    if request.method == 'POST':
+        # Get form data
+        name = request.POST['name']
+        stock = request.POST['stock']
+        description = request.POST['description']
+        price = request.POST['price']
+        image = request.FILES['image']  # Handling file upload
+        
+        # Create a new product and save it
+        product = Product.objects.create(
+            name=name,
+            stock=stock,
+            description=description,
+            price=price,
+            image=image,
+            seller=request.user  # assuming the logged-in user is the seller
+        )
+        
+        # Redirect to the seller dashboard (or a page where the new product is visible)
+        return redirect('sellerindex')
+    
+    return render(request, 'addproduct.html')  # Return the 'Add Product' form template
+
+
+
+
+
+
 
 
 
