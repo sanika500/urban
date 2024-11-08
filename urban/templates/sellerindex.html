@@ -1,52 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <h1>SELLER PAGE</h1>
-   
-    <form action="{% url 'sellerindex' %}" method="post">
-        {% csrf_token %}
-        <select name="model" id="model" >
-            <option value="all">All</option>
-            {% for model in models %}
-            <option value="{{ model.pk }}">{{ model.model }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" value="Apply">
-    </form>
-
-    <a href="{% url 'addproduct' %}"><button class="btn btn-dark ">Add Product</button></a>
-    </div>
-<div>
-    {% for product in products %}
-    <div class="image">
-       
-        {% comment %} <img src="{{i.images.url}}" alt="images"> {% endcomment %}
-        <img src="{% static 'images' %}" alt=images>
-        <h1>Name</h1>
-        <h3>Stock</h3>
-        <h3>Description</h3>
-        <h1>Price</h1>
-        <h3>Accessories</h3>
-        <h1>Booking Amount</h1>
-        <a href="{% url 'edit'%}">edit</a>
-        <a href="{% url 'delete'%}">delete</a>
-
-    </div>
-    {% endfor %}
-</div>
-
-
-    
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,7 +29,7 @@
     <div>
         {% for product in products %}
         <div class="product">
-            <!-- Display product image if available -->
+         
             {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 200px; height: auto;">
             {% else %}

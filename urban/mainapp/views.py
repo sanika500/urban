@@ -172,29 +172,38 @@ def sellerlogin(request):
 
 
 
-def sellerindex(request):
+# def sellerindex(request):
    
-    products = Product.objects.all()
+#     products = Product.objects.all()
 
    
     
 
    
-    selected_model = request.POST.get('model', 'all')  
-    if selected_model != 'all':
+#     selected_model = request.POST.get('model', 'all')  
+#     if selected_model != 'all':
        
-        products = products.filter(model__pk=selected_model)
+#         products = products.filter(model__pk=selected_model)
 
+   
+#     context = {
+#         'products': products,
+#         'models': models
+#     }
+
+#     return render(request, 'sellerindex.html', context)
+
+
+
+def sellerindex(request):
+    user = request.user
+    products = Product.objects.filter(seller=user)
    
     context = {
         'products': products,
-        'models': models
+      
     }
-
-    return render(request, 'sellerindex.html', context)
-
-
-
+    return render(request, "sellerindex.html", context)
 
 
 
