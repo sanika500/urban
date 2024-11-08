@@ -171,45 +171,71 @@ def sellerlogin(request):
 
 
 
-def addproduct(request):
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            product = form.save(commit=False)
-            product.seller = request.user  # Ensure the logged-in user is the seller
-            product.save()
-            return redirect('sellerindex')  # Redirect to seller index page after successful form submission
-    else:
-        form = ProductForm()
+
+def sellerindex(request):
+   
+    products = Product.objects.all()
+
+   
     
-    return render(request, 'addproduct.html', {'form': form})
+
+   
+    selected_model = request.POST.get('model', 'all')  
+    if selected_model != 'all':
+       
+        products = products.filter(model__pk=selected_model)
+
+   
+    context = {
+        'products': products,
+        'models': models
+    }
+
+    return render(request, 'sellerindex.html', context)
+
+
+
+
+
+
+
+
+# def addproduct(request):
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             product = form.save(commit=False)
+#             product.seller = request.user  # Ensure the logged-in user is the seller
+#             product.save()
+#             return redirect('sellerindex')  # Redirect to seller index page after successful form submission
+#     else:
+#         form = ProductForm()
+    
+#     return render(request, 'addproduct.html', {'form': form})
 
 
 
 def addproduct(request):
     if request.method == 'POST':
-        # Get form data
+    
         name = request.POST['name']
         stock = request.POST['stock']
         description = request.POST['description']
         price = request.POST['price']
-        image = request.FILES['image']  # Handling file upload
+        image = request.FILES['image']  
+     
+        product = Product.objects.create()
+        name=name,
+        stock=stock,
+        description=description,
+        price=price,
+        image=image,
+        seller=request.user  
         
-        # Create a new product and save it
-        product = Product.objects.create(
-            name=name,
-            stock=stock,
-            description=description,
-            price=price,
-            image=image,
-            seller=request.user  # assuming the logged-in user is the seller
-        )
-        
-        # Redirect to the seller dashboard (or a page where the new product is visible)
+       
         return redirect('sellerindex')
     
-    return render(request, 'addproduct.html')  # Return the 'Add Product' form template
-
+    return render(request, 'addproduct.html')  
 
 
 
