@@ -233,13 +233,13 @@ def addproduct(request):
         price = request.POST['price']
         image = request.FILES['image']  
      
-        product = Product.objects.create()
+        product = Product.objects.create(
         name=name,
         stock=stock,
         description=description,
         price=price,
         image=image,
-        seller=request.user  
+        seller=request.user  )
         
        
         return redirect('sellerindex')
