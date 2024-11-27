@@ -10,5 +10,7 @@ urlpatterns=[
      path('sellerindex',views.sellerindex,name="sellerindex"),
      path('login',views.login_view,name="login"),
      path('addproduct/', views.addproduct, name='addproduct'),
+     path('edit/<int:pk>/', views.edit_product, name='edit'),
+     path('delete/<int:pk>/', views.delete_product, name='delete'),
     
 ]

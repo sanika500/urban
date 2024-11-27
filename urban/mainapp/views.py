@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -233,19 +233,32 @@ def addproduct(request):
         price = request.POST['price']
         image = request.FILES['image']  
      
-        product = Product.objects.create(
+        prod = Product.objects.create(
         name=name,
         stock=stock,
         description=description,
         price=price,
         image=image,
+        bookingamount=0,
         seller=request.user  )
+        prod.save()
         
        
         return redirect('sellerindex')
     
     return render(request, 'addproduct.html')  
 
+
+
+def edit_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    # Your logic to handle the edit form goes here
+    return render(request, 'edit_product.html', {'product': product})
+
+def delete_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    product.delete()
+    return redirect('sellerindex')
 
 
 
