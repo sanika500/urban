@@ -252,13 +252,15 @@ def addproduct(request):
 
 def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    # Your logic to handle the edit form goes here
     return render(request, 'edit_product.html', {'product': product})
 
 def delete_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product.delete()
     return redirect('sellerindex')
+
+def contact(request):
+    return  render(request,'contact.html')
 
 
 
