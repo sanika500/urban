@@ -239,7 +239,7 @@ def addproduct(request):
         description=description,
         price=price,
         image=image,
-        bookingamount=0,
+        bookingamount=5000,
         seller=request.user  )
         prod.save()
         
@@ -262,6 +262,8 @@ def delete_product(request, pk):
 def contact(request):
     return  render(request,'contact.html')
 
+def about(request):
+    return render(request,"about.html")
 
 
 

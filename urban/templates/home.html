@@ -14,9 +14,9 @@
 <body>
 
     <ul>
-        <li><a href="#LOGO">URBAN</a></li>
+        <li><img src="{% static 'images/Logo.png'%}" height="25%" width="20%"></li>
         <li><a href="{% url 'home'%}">Home</a></li>
-        <li><a href="urls.about">About</a></li>
+        <li><a href="{% url 'about'%}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
         <li><a href="urls.product">Product</a></li>
         <li><a href="urls.cart">Cart</a></li>
@@ -37,9 +37,9 @@
            <img src="{% static 'images/classic350emerald.jpg'%}" height="6%" width="100%" alt="classic"> 
         </div>
         <div class="carousel-item">
-            <img src="{% static 'images/classic350stealthblack.jpg'%}" alt="Super Meteor">
+            <img src="{% static 'images/classic350stealthblack.jpg'%}" alt="Super Meteor" width="100%">
           <div class="carousel-item">
-            <img src="{% static 'images/supermeteor650image.png'%}" alt="medallionbronze">
+            <img src="{% static 'images/supermeteor650image.png'%}" alt="medallionbronze" width="100%">
           </div>
 
     </div>
