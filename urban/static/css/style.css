@@ -1,176 +1,35 @@
- h1{
-    color: darkred;
+h1{
+  color: darkred;
 }
 
 
 body {
 
-    margin-top: 10px;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 20px;
+  margin-top: 10px;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
 }
 
 .main {
-    max-width: 400px;
-    margin: auto;
-    padding: 20px;
-    background: white;
-    border-radius: 5px;
-   
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 5px;
+ 
 }
 
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    
-}
-
-input[type="submit"] {
-    background-color: #5cb85c;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color:brown;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  li {
-    display: inline;
-  }
-  
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-  
-  li {
-    float: left;
-  }
-  
-  li a, .dropbtn {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  
-  li a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
-  }
-  
-  li.dropdown {
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-  
-  .dropdown-content a:hover {background-color: #f1f1f1;}
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
- 
-  
-
-  
-
-   .card-container {
-    display: flex;
-    justify-content:space-between; 
-    flex-wrap: wrap; 
-  }
-  
-  .card {
-    margin: 10px; 
-  }
-  
-  .row{
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap:wrap;
-   
-
-    
-
-  }
-  .card123{
- width:auto;
- min-height: 100px;
-     object-fit: contain;
-    margin-top: 45px;
-  
-  }
-  .proimg{
-    object-fit: contain;
-   
-    height: 250px;
-    width: 500px;
-    margin-bottom: -70px;
-    
-    
-  }
-
-
-
- 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-}
-
-.login {
-  max-width: 300px;
-  margin: 50px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
-  width: 80%;
+  width: 100%;
   padding: 10px;
-  margin: 10px ;
+  margin: 10px 0;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+  
 }
 
 input[type="submit"] {
@@ -178,148 +37,288 @@ input[type="submit"] {
   color: white;
   border: none;
   cursor: pointer;
-  margin-left: 17px;
-  
 }
 
 input[type="submit"]:hover {
-  background-color: #4cae4c;
+  background-color:brown;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+ .card-container {
+  display: flex;
+  justify-content:space-between; 
+  flex-wrap: wrap; 
+}
+
+.card {
+  margin: 10px; 
+}
+
+.row{
+  display:flex;
+  justify-content: space-evenly;
+  flex-wrap:wrap;
+ 
+
+  
+
+}
+.card123{
+width:auto;
+min-height: 100px;
+   object-fit: contain;
+  margin-top: 45px;
+
+}
+.proimg{
+  object-fit: contain;
+ 
+  height: 250px;
+  width: 500px;
+  margin-bottom: -70px;
+  
+  
+}
+
+
+
+
+body {
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+}
+
+.login {
+max-width: 300px;
+margin: 50px auto;
+padding: 20px;
+background: #fff;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+width: 80%;
+padding: 10px;
+margin: 10px ;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+input[type="submit"] {
+background-color: #5cb85c;
+color: white;
+border: none;
+cursor: pointer;
+margin-left: 17px;
+
+}
+
+input[type="submit"]:hover {
+background-color: #4cae4c;
 }
 
 a {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+display: block;
+text-align: center;
+margin-top: 10px;
 }
 
 
 
 
 .pro {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; 
-  padding: 20px;
+display: flex;
+flex-wrap: wrap;
+justify-content: center; 
+padding: 20px;
 }
 
 .card1234 {
-  background-color:black; 
-  border: 1px solid #ddd;
-  border-radius: 8px; 
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-  margin: 15px; 
-  padding: 20px;
-  width: 220px; 
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s; 
+background-color:black; 
+border: 1px solid #ddd;
+border-radius: 8px; 
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+margin: 15px; 
+padding: 20px;
+width: 220px; 
+text-align: center;
+transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 
 .card1234:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+transform: translateY(-5px); 
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
 }
 
 
 .prodimg {
-  max-width: 100%; 
-  height: auto; 
-  border-radius: 4px; 
+max-width: 100%; 
+height: auto; 
+border-radius: 4px; 
 }
 
 
 h2 {
-  font-size: 18px; 
-  margin: 10px 0; 
-  color: #333;
+font-size: 18px; 
+margin: 10px 0; 
+color: #333;
 }
 
 h6 {
-  font-size: 16px; 
-  color: #28a745; 
-  margin: 5px 0; 
+font-size: 16px; 
+color: #28a745; 
+margin: 5px 0; 
 }
 
 .btn {
-  background-color: #007bff; 
-  color: white; 
-  padding: 10px 15px; 
-  text-decoration: none; 
-  border-radius: 4px; 
-  display: inline-block; 
-  transition: background-color 0.3s; 
+background-color: #007bff; 
+color: white; 
+padding: 10px 15px; 
+text-decoration: none; 
+border-radius: 4px; 
+display: inline-block; 
+transition: background-color 0.3s; 
 }
 
 
 .btn:hover {
-  background-color: #0056b3; 
+background-color: #0056b3; 
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
+font-family: Arial, sans-serif;
+background-color: #f4f4f9;
+margin: 0;
+padding: 0;
 }
 
 h1 {
-  text-align: center;
-  color: #333;
-  margin-top: 20px;
+text-align: center;
+color: #333;
+margin-top: 20px;
 }
 
 form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+max-width: 600px;
+margin: 0 auto;
+padding: 20px;
+background-color: #fff;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px;
 }
 
 input[type="text"],
 input[type="number"],
 textarea,
 input[type="file"] {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+width: 100%;
+padding: 12px;
+margin: 10px 0;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
 }
 
 textarea {
-  height: 150px;
+height: 150px;
 }
 
 input[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 14px 20px;
-  margin: 10px 0;
-  cursor: pointer;
-  width: 100%;
-  border-radius: 4px;
+background-color: #4CAF50;
+color: white;
+border: none;
+padding: 14px 20px;
+margin: 10px 0;
+cursor: pointer;
+width: 100%;
+border-radius: 4px;
 }
 
 input[type="submit"]:hover {
-  background-color: #45a049;
+background-color: #45a049;
 }
 
 a {
-  text-align: center;
-  display: block;
-  margin-top: 20px;
-  color: #333;
-  text-decoration: none;
-  font-size: 16px;
+text-align: center;
+display: block;
+margin-top: 20px;
+color: #333;
+text-decoration: none;
+font-size: 16px;
 }
 
 a:hover {
-  text-decoration: underline;
+text-decoration: underline;
 }
-
 
 

@@ -5,6 +5,11 @@ from django.contrib import messages
 from . models import *
 from .forms import ProductForm
 
+import random
+from django.core.mail import send_mail
+from django.conf import settings
+from .forms import EmailForm, OTPForm, ResetPasswordForm
+
 
 # Create your views here.
 
@@ -268,6 +273,81 @@ def about(request):
 
 
 
+otp_storage = {}
+
+def generate_otp():
+    """Generate a 6-digit OTP"""
+    return str(random.randint(100000, 999999))
+
+def request_otp(request):
+    """Step 1: User enters email, OTP is sent"""
+    if request.method == "POST":
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            try:
+                user = User.objects.get(email=email)
+                otp = generate_otp()
+                otp_storage[email] = otp  # Store OTP temporarily
+                send_mail(
+                    "Password Reset OTP",
+                    f"Your OTP for password reset is: {otp}",
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False
+                )
+                request.session['email'] = email
+                messages.success(request, "OTP sent to your email!")
+                return redirect('verify_otp')
+            except User.DoesNotExist:
+                messages.error(request, "Email not registered!")
+    else:
+        form = EmailForm()
+    return render(request, "forgot_password.html", {"form": form})
+
+def verify_otp(request):
+    """Step 2: User enters OTP"""
+    email = request.session.get('email')
+    if not email:
+        return redirect('forgot_password')
+
+    if request.method == "POST":
+        form = OTPForm(request.POST)
+        if form.is_valid():
+            entered_otp = form.cleaned_data['otp']
+            if otp_storage.get(email) == entered_otp:
+                del otp_storage[email]  # Clear OTP after use
+                messages.success(request, "OTP verified! Set a new password.")
+                return redirect('reset_password')
+            else:
+                messages.error(request, "Invalid OTP!")
+    else:
+        form = OTPForm()
+    return render(request, "verify_otp.html", {"form": form})
+
+def reset_password(request):
+    """Step 3: User resets password"""
+    email = request.session.get('email')
+    if not email:
+        return redirect('forgot_password')
+
+    if request.method == "POST":
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            confirm_password = form.cleaned_data['confirm_password']
+
+            if new_password == confirm_password:
+                user = User.objects.get(email=email)
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, "Password reset successful! You can now log in.")
+                return redirect('login')
+            else:
+                messages.error(request, "Passwords do not match!")
+    else:
+        form = ResetPasswordForm()
+    return render(request, "reset_password.html", {"form": form})
 
 
 
